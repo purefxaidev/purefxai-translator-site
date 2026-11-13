@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0b0d17">
+<meta name="description" content="แปลภาษา Real Time — เสียง ข้อความ และกล้อง ในแอปเดียว">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="แปลภาษา">
+<title>แปลภาษา Real Time</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg-glow"></div>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">文<span>A</span></div>
+    <div>
+      <h1 data-i18n="appName">แปลภาษา Real Time</h1>
+      <p class="sub" data-i18n="tagline">เสียง • ข้อความ • กล้อง</p>
+    </div>
+  </div>
+  <button id="uiLangBtn" class="chip" aria-label="UI language">EN</button>
+</header>
+
+<main>
+  <!-- VOICE -->
+  <section id="tab-voice" class="tab active">
+    <div class="seg">
+      <button class="seg-btn active" data-vmode="single" data-i18n="vSingle">แปลเสียง</button>
+      <button class="seg-btn" data-vmode="convo" data-i18n="vConvo">โหมดสนทนา</button>
+    </div>
+
+    <div id="voiceSingle">
+      <div class="langbar">
+        <select id="vSrc" class="lang-select"></select>
+        <button class="swap" id="vSwap" aria-label="swap">⇄</button>
+        <select id="vTgt" class="lang-select"></select>
+      </div>
+      <div class="card">
+        <div class="card-label" data-i18n="youSaid">คุณพูดว่า</div>
+        <div id="vOrig" class="big-text muted" data-i18n="tapMic">แตะไมค์แล้วเริ่มพูด…</div>
+      </div>
+      <div class="card accent">
+        <div class="card-label"><span data-i18n="translation">คำแปล</span>
+          <span class="card-actions">
+            <button class="icon-btn" id="vSpeak" title="speak">🔊</button>
+            <button class="icon-btn" id="vCopy" title="copy">📋</button>
+          </span>
+        </div>
+        <div id="vTrans" class="big-text">—</div>
+      </div>
+      <label class="toggle"><input type="checkbox" id="vAutoSpeak" checked> <span data-i18n="autoSpeak">อ่านออกเสียงคำแปลอัตโนมัติ</span></label>
+      <div class="mic-wrap">
+        <button id="vMic" class="mic" aria-label="mic"><span class="mic-ico">🎤</span><span class="ring"></span><span class="ring r2"></span></button>
+        <div id="vStatus" class="status" data-i18n="tapToStart">แตะเพื่อเริ่ม</div>
+      </div>
+    </div>
+
+    <div id="voiceConvo" class="hidden convo">
+      <div class="convo-side flip" id="sideB">
+        <div class="langbar small"><select id="cLangB" class="lang-select"></select></div>
+        <div class="convo-text" id="cTextB"><span class="muted" data-i18n="tapMicSpeak">แตะไมค์เพื่อพูด</span></div>
+        <button class="mic small-mic" id="cMicB"><span class="mic-ico">🎤</span><span class="ring"></span></button>
+      </div>
+      <button class="swap convo-swap" id="cSwap" aria-label="swap">⇅</button>
+      <div class="convo-side" id="sideA">
+        <div class="langbar small"><select id="cLangA" class="lang-select"></select></div>
+        <div class="convo-text" id="cTextA"><span class="muted" data-i18n="tapMicSpeak">แตะไมค์เพื่อพูด</span></div>
+        <button class="mic small-mic" id="cMicA"><span class="mic-ico">🎤</span><span class="ring"></span></button>
+      </div>
+    </div>
+    <p id="srWarn" class="warn hidden" data-i18n="srUnsupported">เบราว์เซอร์นี้ไม่รองรับการรู้จำเสียง แนะนำ Chrome / Edge / Android</p>
+  </section>
+
+  <!-- TEXT -->
+  <section id="tab-text" class="tab">
+    <div class="langbar">
+      <select id="tSrc" class="lang-select"></select>
+      <button class="swap" id="tSwap" aria-label="swap">⇄</button>
+      <select id="tTgt" class="lang-select"></select>
+    </div>
+    <div class="card input-card">
+      <textarea id="tInput" rows="4" data-i18n-ph="typeHere" placeholder="พิมพ์หรือวางข้อความที่นี่…"></textarea>
+      <div class="card-foot">
+        <span id="tDetected" class="detected"></span>
+        <span class="card-actions">
+          <button class="icon-btn" id="tPaste" title="paste">📥</button>
+          <button class="icon-btn" id="tSpeakSrc" title="speak">🔊</button>
+          <button class="icon-btn" id="tClear" title="clear">✕</button>
+        </span>
+      </div>
+    </div>
+    <div class="card accent">
+      <div class="card-label"><span data-i18n="translation">คำแปล</span>
+        <span class="card-actions">
+          <button class="icon-btn" id="tSpeak" title="speak">🔊</button>
+          <button class="icon-btn" id="tCopy" title="copy">📋</button>
+          <button class="icon-btn" id="tSave" title="save">⭐</button>
+        </span>
+      </div>
+      <div id="tOutput" class="big-text"><span class="muted">—</span></div>
+      <div id="tLoading" class="loader hidden"><i></i><i></i><i></i></div>
+    </div>
+    <div class="history-head">
+      <h3 data-i18n="history">ประวัติ</h3>
+      <button class="link" id="hClear" data-i18n="clearAll">ล้างทั้งหมด</button>
+    </div>
+    <ul id="history" class="history"></ul>
+  </section>
+
+  <!-- CAMERA -->
+  <section id="tab-camera" class="tab">
+    <div class="langbar">
+      <select id="cSrc" class="lang-select"></select>
+      <button class="swap" id="camSwap" aria-label="swap">⇄</button>
+      <select id="cTgt" class="lang-select"></select>
+    </div>
+    <div class="cam-box">
+      <video id="camVideo" playsinline muted autoplay></video>
+      <canvas id="camCanvas" class="hidden"></canvas>
+      <img id="camImg" class="hidden" alt="">
+      <div id="camPlaceholder" class="cam-ph">
+        <div class="cam-ph-ico">📷</div>
+        <p data-i18n="camHint">เปิดกล้อง หรืออัปโหลดรูปเพื่อแปลข้อความในภาพ</p>
+      </div>
+      <div class="scan-line hidden" id="scanLine"></div>
+      <div id="camOverlay" class="cam-overlay hidden"></div>
+    </div>
+    <div class="cam-controls">
+      <button class="btn ghost" id="camStart" data-i18n="openCam">เปิดกล้อง</button>
+      <button class="shutter" id="camCapture" aria-label="capture"></button>
+      <label class="btn ghost" for="camFile"><span data-i18n="upload">อัปโหลดรูป</span><input type="file" id="camFile" accept="image/*" hidden></label>
+    </div>
+    <div id="ocrProgress" class="progress hidden"><div class="bar"></div><span class="ptext"></span></div>
+    <div class="card">
+      <div class="card-label"><span data-i18n="detectedText">ข้อความที่พบ</span>
+        <span class="card-actions"><button class="icon-btn" id="ocrCopy">📋</button></span></div>
+      <div id="ocrText" class="mid-text muted">—</div>
+    </div>
+    <div class="card accent">
+      <div class="card-label"><span data-i18n="translation">คำแปล</span>
+        <span class="card-actions">
+          <button class="icon-btn" id="ocrSpeak">🔊</button>
+          <button class="icon-btn" id="ocrTCopy">📋</button>
+        </span></div>
+      <div id="ocrTrans" class="big-text">—</div>
+    </div>
+  </section>
+</main>
+
+<nav class="tabbar">
+  <button class="tab-btn active" data-tab="voice"><span class="ti">🎙️</span><span data-i18n="tabVoice">เสียง</span></button>
+  <button class="tab-btn" data-tab="text"><span class="ti">⌨️</span><span data-i18n="tabText">ข้อความ</span></button>
+  <button class="tab-btn" data-tab="camera"><span class="ti">📷</span><span data-i18n="tabCamera">กล้อง</span></button>
+  <span class="tab-indicator"></span>
+</nav>
+<div id="toast" class="toast"></div>
+<script src="js/langs.js"></script>
+<script src="js/translate.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

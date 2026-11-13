@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>แปลภาษา Real Time — By PureFxAi</title>
+<meta name="description" content="แอปแปลภาษาแบบเรียลไทม์บน Android ด้วย Gemini: แปลเสียงต่อเนื่อง ลูกบอลลอยบนทุกแอป แปลข้อความ กล้อง/หน้าจอ ถอดเสียง และอ่านออกเสียง 70+ ภาษา">
+<meta name="theme-color" content="#0b0d17">
+<meta property="og:title" content="แปลภาษา Real Time — By PureFxAi">
+<meta property="og:description" content="แปลเสียงแบบเรียลไทม์ ลูกบอลลอยบนทุกแอป 70+ ภาษา ขับเคลื่อนด้วย Gemini">
+<meta property="og:image" content="img/icon.png">
+<link rel="icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0d17;--bg2:#121527;--card:rgba(255,255,255,.05);--b:rgba(255,255,255,.09);--t:#eef0ff;--m:#8b90b3;--a1:#7c5cff;--a2:#00d4ff;--a3:#ff4fd8;--g:linear-gradient(135deg,var(--a1),var(--a2))}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--t);font-family:"Noto Sans Thai","Inter",system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+.glow{position:fixed;inset:-20%;z-index:-1;pointer-events:none;background:radial-gradient(40% 30% at 15% 5%,rgba(124,92,255,.32),transparent 70%),radial-gradient(35% 30% at 90% 25%,rgba(0,212,255,.2),transparent 70%),radial-gradient(40% 30% at 50% 100%,rgba(255,79,216,.14),transparent 70%);animation:d 18s ease-in-out infinite alternate}
+@keyframes d{to{transform:translate(3%,-3%) scale(1.05)}}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(11,13,23,.7);border-bottom:1px solid var(--b)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;text-decoration:none}
+.brand img{width:34px;height:34px;border-radius:10px}
+.navr{display:flex;gap:8px;align-items:center}
+.chip{border:1px solid var(--b);background:var(--card);color:var(--t);border-radius:999px;padding:7px 14px;font-weight:700;font-size:13px;cursor:pointer;text-decoration:none;font-family:inherit}
+.hero{text-align:center;padding:56px 0 30px}
+.hero .icon{width:128px;height:128px;border-radius:30px;box-shadow:0 20px 60px rgba(124,92,255,.5);animation:float 5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px)}}
+h1{font-size:clamp(34px,8vw,60px);line-height:1.15;margin:22px 0 8px;font-weight:800;background:linear-gradient(90deg,#fff,#b9c4ff 50%,#7fe8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.by{color:var(--a2);font-weight:700;letter-spacing:.12em;font-size:14px}
+.lead{color:#c5c9e8;font-size:clamp(16px,3.6vw,20px);max-width:640px;margin:14px auto 28px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--g);color:#fff;text-decoration:none;font-weight:800;font-size:18px;padding:16px 30px;border-radius:18px;box-shadow:0 12px 40px rgba(124,92,255,.45);transition:transform .2s}
+.btn:hover{transform:translateY(-2px) scale(1.02)}
+.btn.ghost{background:var(--card);border:1px solid var(--b);box-shadow:none;font-size:15px;padding:13px 20px}
+.btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.meta{color:var(--m);font-size:13px;margin-top:12px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:22px}
+.badge{border:1px solid var(--b);background:var(--card);border-radius:999px;padding:6px 12px;font-size:13px;color:#c5c9e8}
+section{padding:50px 0}
+h2{font-size:clamp(26px,5.5vw,38px);text-align:center;margin:0 0 8px}
+.sub{text-align:center;color:var(--m);margin:0 auto 30px;max-width:620px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.f{background:var(--card);border:1px solid var(--b);border-radius:22px;padding:22px;transition:transform .25s,border-color .25s}
+.f:hover{transform:translateY(-4px);border-color:rgba(124,92,255,.5)}
+.f .e{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,rgba(124,92,255,.3),rgba(0,212,255,.2));margin-bottom:12px}
+.f h3{margin:0 0 6px;font-size:18px}.f p{margin:0;color:#b4b8d8;font-size:14.5px}
+.f.big{grid-column:1/-1;background:linear-gradient(135deg,rgba(124,92,255,.2),rgba(0,212,255,.1));border-color:rgba(124,92,255,.4)}
+.f.big h3{font-size:22px}
+.phones{display:flex;gap:18px;overflow-x:auto;padding:10px 4px 24px;scroll-snap-type:x mandatory;justify-content:safe center}
+.phone{flex:none;width:230px;scroll-snap-align:center;text-align:center}
+.phone .frame{border-radius:34px;padding:8px;background:linear-gradient(160deg,#2a2f55,#0f1226);box-shadow:0 20px 50px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.08)}
+.phone img{width:100%;display:block;border-radius:27px;aspect-ratio:9/19.5;object-fit:cover;object-position:top;background:#0b0d17}
+.phone span{display:block;margin-top:10px;color:var(--m);font-size:14px}
+.steps{counter-reset:s;display:grid;gap:12px;max-width:720px;margin:0 auto}
+.step{display:flex;gap:14px;background:var(--card);border:1px solid var(--b);border-radius:18px;padding:16px 18px}
+.step:before{counter-increment:s;content:counter(s);flex:none;width:34px;height:34px;border-radius:50%;background:var(--g);display:grid;place-items:center;font-weight:800}
+.step b{display:block}.step p{margin:2px 0 0;color:#b4b8d8;font-size:14.5px}
+.langs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:820px;margin:0 auto}
+.cta{text-align:center;background:linear-gradient(135deg,rgba(124,92,255,.22),rgba(0,212,255,.12));border:1px solid rgba(124,92,255,.4);border-radius:28px;padding:40px 20px}
+footer{border-top:1px solid var(--b);padding:28px 0 40px;text-align:center;color:var(--m);font-size:14px}
+footer b{color:var(--t)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<nav><div class="wrap">
+  <a class="brand" href="#"><img src="img/icon.png" alt=""><span data-i="name">แปลภาษา Real Time</span></a>
+  <div class="navr"><a class="chip" href="app/" data-i="webapp">เว็บแอป</a><button class="chip" id="lang">EN</button></div>
+</div></nav>
+
+<header class="hero wrap">
+  <img class="icon" src="img/icon.png" alt="แปลภาษา Real Time">
+  <h1 data-i="name">แปลภาษา Real Time</h1>
+  <div class="by">BY PUREFXAI</div>
+  <p class="lead" data-i="lead">พูดได้ต่อเนื่อง แปลทันทีพร้อมเสียง — ลูกบอลแปลลอยอยู่บนทุกแอป แปลเสียง ข้อความ กล้อง และหน้าจอ ขับเคลื่อนด้วย Gemini</p>
+  <div class="btns">
+    <a class="btn dl" href="#" id="dl1">⬇️ <span data-i="download">ดาวน์โหลด APK</span></a>
+    <a class="btn ghost" href="#install" data-i="howto">วิธีติดตั้ง</a>
+  </div>
+  <div class="meta"><span data-i="android">Android 8.0 ขึ้นไป</span> • <span id="ver">latest</span></div>
+  <div class="badges"><span class="badge">🌐 70+ <span data-i="languages">ภาษา</span></span><span class="badge">✨ Powered by Gemini</span><span class="badge">🫧 <span data-i="overlay">ลอยบนทุกแอป</span></span><span class="badge">🎙️ Hands-free</span></div>
+</header>
+
+<section class="wrap reveal">
+  <h2 data-i="featTitle">ฟีเจอร์ครบในแอปเดียว</h2>
+  <p class="sub" data-i="featSub">ตั้งแต่คุยกับชาวต่างชาติ อ่านป้าย ไปจนถึงแปลแชทในแอปอื่น</p>
+  <div class="grid">
+    <div class="f big"><div class="e">🌐</div><h3 data-i="f1t">แปล Realtime</h3><p data-i="f1d">พูดต่อเนื่องได้เลยไม่ต้องกดหยุดทีละประโยค ระบบสตรีมเสียงไป Gemini Live แสดงคำบรรยายต้นฉบับและคำแปลสด ๆ พร้อมเล่นเสียงแปลทันที มีโหมดสนทนา 2 ทางที่ตรวจจับเองว่าใครพูดภาษาอะไร แล้วแปลไปอีกภาษาให้อัตโนมัติ</p></div>
+    <div class="f"><div class="e">🫧</div><h3 data-i="f2t">ลูกบอลลอยบนทุกแอป</h3><p data-i="f2d">ลากไปไว้ขอบจอได้ แตะเพื่อเปิดหน้าต่างแปลเล็ก ๆ ทับ LINE, Facebook, เกม หรือแอปใดก็ได้ ลากไปที่ ✕ เพื่อปิด</p></div>
+    <div class="f"><div class="e">🎙️</div><h3 data-i="f3t">แปลเสียง</h3><p data-i="f3d">ฟังและแปลเสียงพูดแบบเรียลไทม์ เสียงแปลเป็นธรรมชาติ</p></div>
+    <div class="f"><div class="e">⌨️</div><h3 data-i="f4t">แปลข้อความ</h3><p data-i="f4d">พิมพ์ วาง หรือกด "แปลคลิปบอร์ด" แปลระหว่างพิมพ์ แชร์ข้อความจากแอปอื่นมาแปลได้</p></div>
+    <div class="f"><div class="e">📷</div><h3 data-i="f5t">กล้อง & หน้าจอ</h3><p data-i="f5d">ถ่ายรูปป้าย เมนู เอกสาร หรือจับภาพหน้าจอแอปที่เปิดอยู่ อ่านข้อความ (รวมภาษาไทย) แล้วแปลให้ทันที</p></div>
+    <div class="f"><div class="e">📝</div><h3 data-i="f6t">เสียง → ข้อความ</h3><p data-i="f6d">ถอดเสียงพูดเป็นข้อความแบบสด คัดลอก แชร์ หรือบันทึกเป็นไฟล์</p></div>
+    <div class="f"><div class="e">🔊</div><h3 data-i="f7t">ข้อความ → เสียง</h3><p data-i="f7d">อ่านออกเสียงด้วยเสียง Gemini กว่า 20 แบบ เล่นทันทีหรือบันทึก/แชร์เป็นไฟล์เสียง</p></div>
+    <div class="f"><div class="e">🕘</div><h3 data-i="f8t">ประวัติ</h3><p data-i="f8d">เก็บคำแปล คำถอดเสียง และไฟล์เสียงไว้ย้อนดูได้ทุกเมื่อ</p></div>
+    <div class="f"><div class="e">✨</div><h3 data-i="f9t">ขับเคลื่อนด้วย Gemini</h3><p data-i="f9d">Gemini Live Translate, Gemini Transcribe และ Gemini TTS รุ่นล่าสุด แม่นยำและเร็ว</p></div>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="wrap"><h2 data-i="shotsTitle">หน้าตาแอป</h2><p class="sub" data-i="shotsSub">ดีไซน์ธีมมืด อ่านง่าย ใช้มือเดียวได้สบาย</p></div>
+  <div class="phones">
+    <div class="phone"><div class="frame"><img src="img/shot-realtime.png" alt="" loading="lazy"></div><span data-i="s1">แปล Realtime</span></div>
+    <div class="phone"><div class="frame"><img src="img/shot-bubble.png" alt="" loading="lazy"></div><span data-i="s2">ลูกบอลลอยบนทุกแอป</span></div>
+    <div class="phone"><div class="frame"><img src="img/shot-text.png" alt="" loading="lazy"></div><span data-i="s3">แปลข้อความ</span></div>
+    <div class="phone"><div class="frame"><img src="img/shot-tts.png" alt="" loading="lazy"></div><span data-i="s4">ข้อความ → เสียง</span></div>
+  </div>
+</section>
+
+<section class="wrap reveal" id="install">
+  <h2 data-i="instTitle">วิธีติดตั้ง</h2>
+  <p class="sub" data-i="instSub">ใช้เวลาไม่ถึง 1 นาที</p>
+  <div class="steps">
+    <div class="step"><div><b data-i="i1t">ดาวน์โหลดไฟล์ APK</b><p data-i="i1d">กดปุ่มดาวน์โหลดด้านบนจากมือถือ Android</p></div></div>
+    <div class="step"><div><b data-i="i2t">อนุญาตติดตั้งจากแหล่งที่ไม่รู้จัก</b><p data-i="i2d">เปิดไฟล์ที่ดาวน์โหลด → ระบบจะถาม → แตะ "การตั้งค่า" แล้วเปิด "อนุญาตจากแหล่งนี้" ให้เบราว์เซอร์ (Chrome) จากนั้นกลับมากด "ติดตั้ง"</p></div></div>
+    <div class="step"><div><b data-i="i3t">อนุญาตไมโครโฟน</b><p data-i="i3d">เปิดแอป แล้วกด "อนุญาต" เมื่อถามสิทธิ์ไมโครโฟนและการแจ้งเตือน</p></div></div>
+    <div class="step"><div><b data-i="i4t">อนุญาต "แสดงทับแอปอื่น"</b><p data-i="i4d">กด "เปิดลูกบอลแปลลอยบนทุกแอป" → ระบบพาไปหน้า ตั้งค่า › แอป › สิทธิ์พิเศษ › แสดงทับแอปอื่น → เลือก "แปลภาษา Real Time" แล้วเปิดสวิตช์ → กลับมากดปุ่มอีกครั้ง</p></div></div>
+    <div class="step"><div><b data-i="i5t">ใส่ Gemini API key (ถ้าแอปถาม)</b><p data-i="i5d">แตะ ⚙️ ตั้งค่า → วาง API key จาก aistudio.google.com → กด "ทดสอบคีย์"</p></div></div>
+  </div>
+</section>
+
+<section class="wrap reveal">
+  <h2 data-i="langTitle">70+ ภาษา</h2>
+  <p class="sub" data-i="langSub">ภาษาเอเชียและภาษายอดนิยมทั่วโลก</p>
+  <div class="langs" id="langs"></div>
+</section>
+
+<section class="wrap reveal">
+  <div class="cta">
+    <img src="img/icon.png" alt="" style="width:72px;height:72px;border-radius:18px">
+    <h2 style="margin-top:12px" data-i="ctaTitle">พร้อมคุยได้ทุกภาษาแล้วหรือยัง?</h2>
+    <p class="sub" data-i="ctaSub">ฟรี ติดตั้งง่าย ใช้ได้ทันที</p>
+    <a class="btn dl" href="#" id="dl2">⬇️ <span data-i="download">ดาวน์โหลด APK</span></a>
+  </div>
+</section>
+
+<footer><div class="wrap"><b data-i="name">แปลภาษา Real Time</b> • By <b>PureFxAi</b><br><span data-i="foot">ขับเคลื่อนด้วย Google Gemini</span> • © 2026 PureFxAi</div></footer>
+
+<script>
+const APK_REPO='purefxaidev/purefxai-translator-site';
+const FALLBACK='https://github.com/'+APK_REPO+'/releases/latest';
+const EN={name:'Real Time Translator',webapp:'Web app',lead:'Speak continuously and get instant spoken translation — a floating translator bubble over every app for voice, text, camera and screen. Powered by Gemini.',download:'Download APK',howto:'How to install',android:'Android 8.0+',languages:'languages',overlay:'Over all apps',featTitle:'Everything in one app',featSub:'From talking to foreigners and reading signs to translating chats inside other apps',
+f1t:'Realtime Translate',f1d:'Keep talking — no need to stop after each sentence. Audio streams to Gemini Live, showing live subtitles of the original and the translation while the translated voice plays immediately. Two-way conversation mode auto-detects which language is spoken and translates to the other.',
+f2t:'Floating bubble over all apps',f2d:'Drag it to any edge; tap to open a compact translator over LINE, Facebook, games or any app. Drag to ✕ to close.',f3t:'Voice translation',f3d:'Live speech translation with natural translated voice.',f4t:'Text translation',f4d:'Type, paste or tap "Translate clipboard". Translates as you type; share text from other apps.',f5t:'Camera & screen',f5d:'Photograph signs, menus, documents or capture the screen of the app you are in — text (incl. Thai) is read and translated instantly.',f6t:'Speech → Text',f6d:'Live transcription; copy, share or save to a file.',f7t:'Text → Speech',f7d:'Read aloud with 20+ Gemini voices; play or save/share as an audio file.',f8t:'History',f8d:'Every translation, transcript and audio file saved for later.',f9t:'Powered by Gemini',f9d:'Latest Gemini Live Translate, Gemini Transcribe and Gemini TTS — accurate and fast.',
+shotsTitle:'Screenshots',shotsSub:'Dark, readable, one-hand friendly design',s1:'Realtime Translate',s2:'Floating bubble',s3:'Text translation',s4:'Text → Speech',instTitle:'How to install',instSub:'Takes under a minute',
+i1t:'Download the APK',i1d:'Tap the download button on your Android phone.',i2t:'Allow installs from unknown sources',i2d:'Open the downloaded file → tap "Settings" when prompted → enable "Allow from this source" for your browser (Chrome) → go back and tap "Install".',i3t:'Allow microphone',i3d:'Open the app and allow microphone and notifications.',i4t:'Allow "Display over other apps"',i4d:'Tap "Start floating bubble" → Settings › Apps › Special access › Display over other apps → choose "แปลภาษา Real Time" and switch it on → come back and tap the button again.',i5t:'Enter a Gemini API key (if asked)',i5d:'Tap ⚙️ Settings → paste an API key from aistudio.google.com → tap "Test key".',
+langTitle:'70+ languages',langSub:'Asian languages and the world\'s most popular ones',ctaTitle:'Ready to talk in any language?',ctaSub:'Free, easy to install, works instantly',foot:'Powered by Google Gemini'};
+const TH={};document.querySelectorAll('[data-i]').forEach(e=>{TH[e.dataset.i]=TH[e.dataset.i]||e.textContent});
+let ui=localStorage.getItem('ui')||'th';
+function apply(){const d=ui==='en'?EN:TH;document.querySelectorAll('[data-i]').forEach(e=>{if(d[e.dataset.i])e.textContent=d[e.dataset.i]});document.documentElement.lang=ui;document.getElementById('lang').textContent=ui==='en'?'ไทย':'EN';renderLangs()}
+document.getElementById('lang').onclick=()=>{ui=ui==='en'?'th':'en';localStorage.setItem('ui',ui);apply()};
+const L=[['🇹🇭','ไทย','Thai'],['🇬🇧','อังกฤษ','English'],['🇨🇳','จีน','Chinese'],['🇯🇵','ญี่ปุ่น','Japanese'],['🇰🇷','เกาหลี','Korean'],['🇻🇳','เวียดนาม','Vietnamese'],['🇱🇦','ลาว','Lao'],['🇰🇭','เขมร','Khmer'],['🇲🇲','พม่า','Burmese'],['🇲🇾','มาเลย์','Malay'],['🇮🇩','อินโดนีเซีย','Indonesian'],['🇵🇭','ฟิลิปปินส์','Filipino'],['🇮🇳','ฮินดี','Hindi'],['🇸🇦','อาหรับ','Arabic'],['🇷🇺','รัสเซีย','Russian'],['🇫🇷','ฝรั่งเศส','French'],['🇩🇪','เยอรมัน','German'],['🇪🇸','สเปน','Spanish'],['🇮🇹','อิตาลี','Italian'],['🇧🇷','โปรตุเกส','Portuguese'],['🇹🇷','ตุรกี','Turkish'],['🇳🇱','ดัตช์','Dutch'],['🇵🇱','โปแลนด์','Polish'],['🇺🇦','ยูเครน','Ukrainian'],['➕','และอีกมากมาย','and many more']];
+function renderLangs(){document.getElementById('langs').innerHTML=L.map(l=>`<span class="badge">${l[0]} ${ui==='en'?l[2]:l[1]}</span>`).join('')}
+apply();
+// latest APK asset from GitHub Releases
+document.querySelectorAll('.dl').forEach(a=>a.href=FALLBACK);
+fetch('https://api.github.com/repos/'+APK_REPO+'/releases/latest').then(r=>r.json()).then(j=>{const a=(j.assets||[]).find(x=>x.name.endsWith('.apk'));if(a){document.querySelectorAll('.dl').forEach(b=>b.href=a.browser_download_url);document.getElementById('ver').textContent=j.tag_name+' • '+(a.size/1048576).toFixed(1)+' MB'}}).catch(()=>{});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
+</script>
+</body>
+</html>
