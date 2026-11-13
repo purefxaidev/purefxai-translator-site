@@ -36,7 +36,9 @@ h1{font-size:clamp(34px,8vw,60px);line-height:1.15;margin:22px 0 8px;font-weight
 .btn:hover{transform:translateY(-2px) scale(1.02)}
 .btn.ghost{background:var(--card);border:1px solid var(--b);box-shadow:none;font-size:15px;padding:13px 20px}
 .btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-.meta{color:var(--m);font-size:13px;margin-top:12px}
+.meta{color:var(--m);font-size:13px;margin-top:8px}
+.ver{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:16px;font-size:14px;color:#c5c9e8}
+.vtag{background:var(--g);color:#fff;font-weight:800;border-radius:999px;padding:4px 12px;font-family:Inter,sans-serif}
 .badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:22px}
 .badge{border:1px solid var(--b);background:var(--card);border-radius:999px;padding:6px 12px;font-size:13px;color:#c5c9e8}
 section{padding:50px 0}
@@ -81,7 +83,8 @@ footer b{color:var(--t)}
     <a class="btn dl" href="#" id="dl1">⬇️ <span data-i="download">ดาวน์โหลด APK</span></a>
     <a class="btn ghost" href="#install" data-i="howto">วิธีติดตั้ง</a>
   </div>
-  <div class="meta"><span data-i="android">Android 8.0 ขึ้นไป</span> • <span id="ver">latest</span></div>
+  <div class="ver" id="verBox"><span class="vtag" id="ver">v…</span><span id="vdate"></span></div>
+  <div class="meta"><span data-i="android">Android 8.0 ขึ้นไป</span> • <span id="vsize"></span></div>
   <div class="badges"><span class="badge">🌐 70+ <span data-i="languages">ภาษา</span></span><span class="badge">✨ Powered by Gemini</span><span class="badge">🫧 <span data-i="overlay">ลอยบนทุกแอป</span></span><span class="badge">🎙️ Hands-free</span></div>
 </header>
 
@@ -119,7 +122,7 @@ footer b{color:var(--t)}
     <div class="step"><div><b data-i="i2t">อนุญาตติดตั้งจากแหล่งที่ไม่รู้จัก</b><p data-i="i2d">เปิดไฟล์ที่ดาวน์โหลด → ระบบจะถาม → แตะ "การตั้งค่า" แล้วเปิด "อนุญาตจากแหล่งนี้" ให้เบราว์เซอร์ (Chrome) จากนั้นกลับมากด "ติดตั้ง"</p></div></div>
     <div class="step"><div><b data-i="i3t">อนุญาตไมโครโฟน</b><p data-i="i3d">เปิดแอป แล้วกด "อนุญาต" เมื่อถามสิทธิ์ไมโครโฟนและการแจ้งเตือน</p></div></div>
     <div class="step"><div><b data-i="i4t">อนุญาต "แสดงทับแอปอื่น"</b><p data-i="i4d">กด "เปิดลูกบอลแปลลอยบนทุกแอป" → ระบบพาไปหน้า ตั้งค่า › แอป › สิทธิ์พิเศษ › แสดงทับแอปอื่น → เลือก "แปลภาษา Real Time" แล้วเปิดสวิตช์ → กลับมากดปุ่มอีกครั้ง</p></div></div>
-    <div class="step"><div><b data-i="i5t">ใส่ Gemini API key (ถ้าแอปถาม)</b><p data-i="i5d">แตะ ⚙️ ตั้งค่า → วาง API key จาก aistudio.google.com → กด "ทดสอบคีย์"</p></div></div>
+    <div class="step"><div><b data-i="i5t">ใส่ Gemini API key ของคุณ (ฟรี)</b><p data-i="i5d">เปิดแอปครั้งแรกจะมีหน้าให้ใส่คีย์ → แตะ "รับคีย์ที่ Google AI Studio" (aistudio.google.com/apikey) → Create API key → คัดลอกแล้ววางในแอป → กด "ทดสอบและบันทึก" (แก้ไขภายหลังได้ใน ⚙️ ตั้งค่า)</p></div></div>
   </div>
 </section>
 
@@ -134,7 +137,7 @@ footer b{color:var(--t)}
     <img src="img/icon.png" alt="" style="width:72px;height:72px;border-radius:18px">
     <h2 style="margin-top:12px" data-i="ctaTitle">พร้อมคุยได้ทุกภาษาแล้วหรือยัง?</h2>
     <p class="sub" data-i="ctaSub">ฟรี ติดตั้งง่าย ใช้ได้ทันที</p>
-    <a class="btn dl" href="#" id="dl2">⬇️ <span data-i="download">ดาวน์โหลด APK</span></a>
+    <a class="btn dl" href="#" id="dl2">⬇️ <span data-i="download">ดาวน์โหลด APK</span> <span class="v2"></span></a>
   </div>
 </section>
 
@@ -147,7 +150,7 @@ const EN={name:'Real Time Translator',webapp:'Web app',lead:'Speak continuously 
 f1t:'Realtime Translate',f1d:'Keep talking — no need to stop after each sentence. Audio streams to Gemini Live, showing live subtitles of the original and the translation while the translated voice plays immediately. Two-way conversation mode auto-detects which language is spoken and translates to the other.',
 f2t:'Floating bubble over all apps',f2d:'Drag it to any edge; tap to open a compact translator over LINE, Facebook, games or any app. Drag to ✕ to close.',f3t:'Voice translation',f3d:'Live speech translation with natural translated voice.',f4t:'Text translation',f4d:'Type, paste or tap "Translate clipboard". Translates as you type; share text from other apps.',f5t:'Camera & screen',f5d:'Photograph signs, menus, documents or capture the screen of the app you are in — text (incl. Thai) is read and translated instantly.',f6t:'Speech → Text',f6d:'Live transcription; copy, share or save to a file.',f7t:'Text → Speech',f7d:'Read aloud with 20+ Gemini voices; play or save/share as an audio file.',f8t:'History',f8d:'Every translation, transcript and audio file saved for later.',f9t:'Powered by Gemini',f9d:'Latest Gemini Live Translate, Gemini Transcribe and Gemini TTS — accurate and fast.',
 shotsTitle:'Screenshots',shotsSub:'Dark, readable, one-hand friendly design',s1:'Realtime Translate',s2:'Floating bubble',s3:'Text translation',s4:'Text → Speech',instTitle:'How to install',instSub:'Takes under a minute',
-i1t:'Download the APK',i1d:'Tap the download button on your Android phone.',i2t:'Allow installs from unknown sources',i2d:'Open the downloaded file → tap "Settings" when prompted → enable "Allow from this source" for your browser (Chrome) → go back and tap "Install".',i3t:'Allow microphone',i3d:'Open the app and allow microphone and notifications.',i4t:'Allow "Display over other apps"',i4d:'Tap "Start floating bubble" → Settings › Apps › Special access › Display over other apps → choose "แปลภาษา Real Time" and switch it on → come back and tap the button again.',i5t:'Enter a Gemini API key (if asked)',i5d:'Tap ⚙️ Settings → paste an API key from aistudio.google.com → tap "Test key".',
+i1t:'Download the APK',i1d:'Tap the download button on your Android phone.',i2t:'Allow installs from unknown sources',i2d:'Open the downloaded file → tap "Settings" when prompted → enable "Allow from this source" for your browser (Chrome) → go back and tap "Install".',i3t:'Allow microphone',i3d:'Open the app and allow microphone and notifications.',i4t:'Allow "Display over other apps"',i4d:'Tap "Start floating bubble" → Settings › Apps › Special access › Display over other apps → choose "แปลภาษา Real Time" and switch it on → come back and tap the button again.',i5t:'Add your own Gemini API key (free)',i5d:'On first launch the app asks for a key → tap "Get a key at Google AI Studio" (aistudio.google.com/apikey) → Create API key → copy, paste it in the app → "Test & save" (editable later in ⚙️ Settings).',
 langTitle:'70+ languages',langSub:'Asian languages and the world\'s most popular ones',ctaTitle:'Ready to talk in any language?',ctaSub:'Free, easy to install, works instantly',foot:'Powered by Google Gemini'};
 const TH={};document.querySelectorAll('[data-i]').forEach(e=>{TH[e.dataset.i]=TH[e.dataset.i]||e.textContent});
 let ui=localStorage.getItem('ui')||'th';
@@ -158,7 +161,15 @@ function renderLangs(){document.getElementById('langs').innerHTML=L.map(l=>`<spa
 apply();
 // latest APK asset from GitHub Releases
 document.querySelectorAll('.dl').forEach(a=>a.href=FALLBACK);
-fetch('https://api.github.com/repos/'+APK_REPO+'/releases/latest').then(r=>r.json()).then(j=>{const a=(j.assets||[]).find(x=>x.name.endsWith('.apk'));if(a){document.querySelectorAll('.dl').forEach(b=>b.href=a.browser_download_url);document.getElementById('ver').textContent=j.tag_name+' • '+(a.size/1048576).toFixed(1)+' MB'}}).catch(()=>{});
+let REL=null;
+function showRel(){if(!REL)return;const j=REL,a=(j.assets||[]).find(x=>x.name.endsWith('.apk'));
+  document.getElementById('ver').textContent=j.tag_name;
+  const d=new Date(j.published_at||j.created_at);
+  document.getElementById('vdate').textContent=(ui==='en'?'Released ':'อัปเดต ')+d.toLocaleDateString(ui==='en'?'en-GB':'th-TH',{day:'numeric',month:'short',year:'numeric',timeZone:'Asia/Bangkok'});
+  document.querySelectorAll('.v2').forEach(e=>e.textContent=j.tag_name);
+  if(a){document.querySelectorAll('.dl').forEach(b=>b.href=a.browser_download_url);document.getElementById('vsize').textContent=(a.size/1048576).toFixed(1)+' MB'}}
+fetch('https://api.github.com/repos/'+APK_REPO+'/releases/latest').then(r=>r.json()).then(j=>{REL=j;showRel()}).catch(()=>{});
+document.getElementById('lang').addEventListener('click',showRel);
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
 </script>
 </body>
