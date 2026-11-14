@@ -29,7 +29,7 @@ function fillSelects(){
   for (const id in SEL){
     const el = $('#'+id); const noAuto = SEL[id][1] || id==='vSrc' || id==='cSrc';
     const val = el.value || store.get('sel_'+id, SEL[id][0]);
-    el.innerHTML = LANGS.filter(l => !(noAuto && l.code==='auto')).map(l => `<option value="${l.code}">${l.flag} ${l[ui]}</option>`).join('');
+    el.innerHTML = LANGS.filter(l => !(noAuto && l.code==='auto')).map(l => `<option value="${l.code}">${l[ui]}</option>`).join('');
     el.value = val; if (!el.value) el.value = SEL[id][0];
     el.onchange = () => { store.set('sel_'+id, el.value); el.dispatchEvent(new Event('langchange')); };
   }
@@ -157,7 +157,7 @@ async function doText(){
     const r = await Translator.translate(text, $('#tSrc').value, $('#tTgt').value, sig);
     if (sig.aborted) return;
     out.textContent = r.text;
-    if ($('#tSrc').value==='auto' && r.detected){ lastDetected=r.detected; const L=langByCode(r.detected); $('#tDetected').textContent = t('detected')+': '+(L?L.flag+' '+L[ui]:r.detected); } else $('#tDetected').textContent='';
+    if ($('#tSrc').value==='auto' && r.detected){ lastDetected=r.detected; const L=langByCode(r.detected); $('#tDetected').textContent = t('detected')+': '+(L?L[ui]:r.detected); } else $('#tDetected').textContent='';
     clearTimeout(doText._h); doText._h = setTimeout(()=>addHistory(text, r.text, r.detected||$('#tSrc').value, $('#tTgt').value), 2500);
   } catch(e){ if (e.name!=='AbortError'){ out.innerHTML='<span class="muted">'+t('error')+'</span>'; console.warn(e);} }
   finally{ if(!sig.aborted) $('#tLoading').classList.add('hidden'); }
@@ -184,7 +184,7 @@ function renderHistory(){
   const h = store.get('history', []); const ul=$('#history');
   if (!h.length){ ul.innerHTML = `<li class="empty">${t('noHistory')}</li>`; return; }
   ul.innerHTML = h.map((x,i)=>{ const a=langByCode(x.sl), b=langByCode(x.tl);
-    return `<li data-i="${i}"><div class="h-src">${escapeHtml(x.src)}</div><div class="h-tgt">${escapeHtml(x.tgt)}</div><div class="h-meta">${a?a.flag:''} → ${b?b.flag:''} · ${new Date(x.ts).toLocaleString(ui==='th'?'th-TH':'en-US',{dateStyle:'short',timeStyle:'short'})}</div></li>`}).join('');
+    return `<li data-i="${i}"><div class="h-src">${escapeHtml(x.src)}</div><div class="h-tgt">${escapeHtml(x.tgt)}</div><div class="h-meta">${a?a[ui]:x.sl||''} → ${b?b[ui]:x.tl||''} · ${new Date(x.ts).toLocaleString(ui==='th'?'th-TH':'en-US',{dateStyle:'short',timeStyle:'short'})}</div></li>`}).join('');
   ul.querySelectorAll('li[data-i]').forEach(li => li.onclick = () => { const x=h[li.dataset.i]; $('#tInput').value=x.src; $('#tTgt').value=x.tl; autoGrow(); doText(); window.scrollTo({top:0,behavior:'smooth'}); });
 }
 $('#hClear').onclick = () => { store.set('history', []); renderHistory(); };
